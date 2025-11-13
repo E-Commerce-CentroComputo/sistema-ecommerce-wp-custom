@@ -20,7 +20,9 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'ecommerce_db' );
+define('WP_CACHE', true);
+define( 'WPCACHEHOME', 'C:\xampp\htdocs\CentroComputo\wp-content\plugins\wp-super-cache/' );
+define( 'DB_NAME', 'centrocomputo' );
 
 /** Database username */
 define( 'DB_USER', 'root' );
@@ -48,14 +50,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '(41Y!ZO(qlI>2Jqd],O:&:_XhQg3+2 C(h+zU3cV&:>l0[WcITp*`;dl}h4en)hi' );
-define( 'SECURE_AUTH_KEY',  'Hcpx22L{m!,4t.uQQgH5+p9q};~]4fpe wNw 39)YG{p@Z_~ @KG5%S9N{=Y/,d ' );
-define( 'LOGGED_IN_KEY',    'sqjar2Oyo]b(0~Rb&,Y:tm9|A1CY~ej|@e]_h5SEXsdGS7K<Eztz7h K@[t.$7Ug' );
-define( 'NONCE_KEY',        't9A@5<B(R_3MLos&6$ tr@c.1,58a)+ikVcGJ6m#nFcTqUsUS2GAmil6$4#B6I=*' );
-define( 'AUTH_SALT',        '%Y(=#3=tXg!rJEWt9Aadu[uikEXB,52)84K;apHBUP2!8(EOdt`?i>SR8qM}w}%O' );
-define( 'SECURE_AUTH_SALT', 'SdP#EB!;T]Z0<O)#>?HNDj0uhJ)~77*!2j41>3j|Y8m@;Yinzq~b+SoC>oX>_c*x' );
-define( 'LOGGED_IN_SALT',   'v=#GE%gZ;1N:,9-z)E:em}V[sDZk4FE/O~VCl>dpGSc_Vdg(lRQ%McPcg:+wOPq?' );
-define( 'NONCE_SALT',       '|>SK;6fg2.ja;}~>iJgx`2 Y<t-q)9CSrXO%T/}/IOnD8,O`5],,9XV`pt_Vw!UN' );
+define( 'AUTH_KEY',         'ble(z;VG<ORXGp7L4;$C8,ucxn1g=:isJXv2N$Js].h}j2y/P !Q2A}v^P>./tg&' );
+define( 'SECURE_AUTH_KEY',  'k0XkCUY%!a<M:TSC*b)`ORa>&@fj9+?=^~)W=&:9CR8vNE$;l8&Z}IwOIts7BVNT' );
+define( 'LOGGED_IN_KEY',    'h Ob/>3-&W:#~V).o;L/BZjBT=b*3]M[JTP.NQQrCPSP@bQaQ!cz=S=0tJ)}%@(i' );
+define( 'NONCE_KEY',        'L~I7vr#[I<.`efLbDVw@4@rZJ:4}9XZ[+nq&D~(cLAv4+>D(7NGGRL4q2Ow}R:o3' );
+define( 'AUTH_SALT',        'TXq|_qsjER[KIqrDZ+3EgC:#7Fzkxj;4-Bq{WuOwUC9]vykyawXt?8El}+Fj{Jht' );
+define( 'SECURE_AUTH_SALT', '7jk1=~pPi(_8>g tm|SGLxhM/o(^F6I<-ZEl=x7Nd$j;XE& nH:)I9:YL`>iyk_i' );
+define( 'LOGGED_IN_SALT',   'c  #cr<>4~a6PhNPbL[e-x,G#xhB}Ggh81VzYqn*W,,B3nNO.TeDiyG_]ea+f>]K' );
+define( 'NONCE_SALT',       'zG43i258!yq#Jo)EG5#0M vy]_?/YU>KP2~;s<o81A&8Z9@xxPc>u)Z^P[2X$.Oa' );
 
 /**#@-*/
 
@@ -100,3 +102,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
