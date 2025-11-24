@@ -1,0 +1,1467 @@
+/**
+ * Centro Cómputo - Servicios CSS
+ * Diseño minimalista blanco y negro
+ * Color de acento: #64b420
+ */
+
+/* ========================================
+   VARIABLES
+======================================== */
+:root {
+    --color-primary: #000000;
+    --color-secondary: #ffffff;
+    --color-accent: #64b420;
+    --color-gray-50: #fafafa;
+    --color-gray-100: #f5f5f5;
+    --color-gray-200: #e5e5e5;
+    --color-gray-300: #d4d4d4;
+    --color-gray-400: #a3a3a3;
+    --color-gray-500: #737373;
+    --color-gray-600: #525252;
+    --color-gray-700: #404040;
+    --color-gray-800: #262626;
+    --color-gray-900: #171717;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   HERO SECTION
+======================================== */
+.cc-services-hero {
+    position: relative;
+    min-height: 60vh;
+    height: 600px;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    overflow: hidden;
+}
+
+.cc-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.32;
+    /* Por defecto el hero está desaturado y ligeramente atenuado; ajuste más sutil para dejar ver a la persona */
+    filter: grayscale(100%) saturate(0.6) brightness(0.62) contrast(0.95);
+    transform: scale(1.015);
+    transition: filter 420ms cubic-bezier(.2,.9,.2,1), transform 420ms ease, opacity 420ms ease;
+}
+
+.cc-hero-overlay {
+    position: absolute;
+    inset: 0;
+    /* overlay ligeramente menos oscuro para permitir identificar mejor a la persona */
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.65) 0%, 
+        rgba(0, 0, 0, 0.45) 50%, 
+        rgba(0, 0, 0, 0.9) 100%);
+}
+
+/* Solo en dispositivos con soporte de hover aplicamos el efecto interactivo */
+@media (hover: hover) {
+    .cc-services-hero:hover .cc-hero-bg {
+        /* Recupera color y claridad al pasar el mouse */
+        filter: none;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .cc-services-hero:hover .cc-hero-overlay {
+        /* Reducir la oscuridad del overlay para mostrar más color (tono aún ligeramente oscuro para texto legible) */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.45) 100%);
+    }
+}
+
+/* Accesibilidad: usuarios que prefieren reducir movimiento no ven transiciones */
+@media (prefers-reduced-motion: reduce) {
+    .cc-hero-bg { transition: none !important; transform: none !important; }
+}
+
+.cc-hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.cc-hero-inner {
+    max-width: 48rem;
+}
+
+.cc-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-secondary);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.cc-hero-title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin-bottom: 1.5rem;
+    line-height: 0.9;
+    /* Forzar color blanco para garantizar legibilidad sobre el hero */
+    color: #ffffff !important;
+}
+
+.cc-hero-description {
+    font-size: 1.25rem;
+    color: var(--color-gray-300);
+    margin-bottom: 2.5rem;
+    max-width: 36rem;
+}
+
+.cc-hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cc-btn-primary {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 1rem 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.cc-btn-primary:hover {
+    background: var(--color-gray-200);
+}
+
+.cc-btn-secondary {
+    border: 2px solid var(--color-secondary);
+    color: var(--color-secondary);
+    padding: 1rem 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cc-btn-secondary:hover {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+/* ========================================
+   BENEFITS BAR
+======================================== */
+.cc-benefits-bar {
+    padding: 3rem 0;
+    background: var(--color-gray-50);
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.cc-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.cc-benefit-item {
+    text-align: center;
+}
+
+.cc-benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.cc-benefit-item h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.cc-benefit-item p {
+    font-size: 0.75rem;
+    color: var(--color-gray-600);
+}
+
+/* ========================================
+   SERVICES SECTION
+======================================== */
+.cc-services-section {
+    padding: 5rem 0;
+    background: var(--color-secondary);
+}
+
+.cc-section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.cc-section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--color-black-500);
+    margin-bottom: 1rem;
+}
+
+.cc-section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin-bottom: 1rem;
+}
+
+.cc-section-description {
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+}
+
+/* Encabezado de la sección Servicios: usar color primario (negro) ya que el fondo de la sección es blanco */
+.cc-services-section .cc-section-label,
+.cc-services-section .cc-section-title,
+.cc-services-section .cc-section-description {
+    /* Forzar color negro en el encabezado de la sección para evitar reglas externas que lo pongan en blanco */
+    color: var(--color-primary) !important;
+    text-shadow: none !important;
+}
+
+/* ========================================
+   SERVICES GRID
+======================================== */
+.cc-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* Service Card */
+.cc-service-card {
+    background: var(--color-secondary);
+    border: 2px solid var(--color-gray-200);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cc-service-card:hover {
+    border-color: var(--color-gray-400);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cc-service-card.active {
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Service Image */
+.cc-service-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-gray-100);
+}
+
+.cc-service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cc-service-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.cc-service-icon-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.cc-service-price-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    z-index: 2;
+}
+
+/* Service Info */
+.cc-service-info {
+    padding: 1.5rem;
+}
+
+.cc-service-name {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.cc-service-description {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.cc-service-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+}
+
+.cc-service-duration {
+    color: var(--color-gray-500);
+}
+
+.cc-service-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: var(--transition);
+    font-family: var(--font-family);
+}
+
+.cc-service-toggle:hover {
+    color: var(--color-accent);
+}
+
+.cc-service-card.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* ========================================
+   SERVICE DETAILS (Expanded)
+======================================== */
+.cc-service-details {
+    /* Modal container (hidden by default) */
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.cc-service-details.open {
+    display: flex;
+}
+
+/* Modal overlay */
+.cc-service-details .cc-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+}
+
+/* Modal inner card */
+.cc-service-details .cc-modal-inner {
+    position: relative;
+    width: min(1100px, calc(100% - 48px));
+    max-height: calc(100% - 80px);
+    background: var(--color-secondary);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    overflow: auto;
+    padding: 2rem;
+    z-index: 2;
+    animation: fadeIn 220ms ease-out;
+}
+
+/* Close button */
+.cc-service-details .cc-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-gray-700);
+    border-radius: 8px;
+    transition: background 0.15s ease, transform 0.12s ease;
+}
+.cc-service-details .cc-modal-close:hover { background: rgba(0,0,0,0.04); transform: translateY(-2px); }
+.cc-service-details .cc-modal-close:focus { outline: 3px solid rgba(0,0,0,0.06); }
+
+/* Modal layout reuse the details grid inside */
+.cc-service-details .cc-details-grid { gap: 1.5rem; }
+.cc-service-details .cc-details-left, .cc-service-details .cc-details-right { padding: 0; }
+
+@media (max-width: 768px) {
+    .cc-service-details .cc-modal-inner { padding: 1rem; }
+    .cc-service-details .cc-details-grid { grid-template-columns: 1fr; }
+}
+
+.cc-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .cc-details-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Details Left Column */
+.cc-details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.cc-details-header {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.cc-details-icon {
+    width: 5rem;
+    height: 5rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cc-details-info {
+    flex: 1;
+}
+
+.cc-details-badge {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+}
+
+.cc-details-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+}
+
+.cc-details-description {
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+    margin-bottom: 1rem;
+}
+
+.cc-details-base-price {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.cc-details-base-price .price {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Details Image */
+.cc-details-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-gray-100);
+}
+
+.cc-details-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Options Section */
+.cc-options-header {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.cc-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cc-option-card {
+    border: 2px solid var(--color-gray-200);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--color-secondary);
+}
+
+.cc-option-card:hover {
+    border-color: var(--color-gray-400);
+}
+
+.cc-option-card.selected {
+    border-color: var(--color-primary);
+    background: var(--color-gray-50);
+}
+
+.cc-option-content {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+}
+
+.cc-option-checkbox {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.cc-option-checkbox input {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+.cc-option-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cc-option-header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cc-option-name {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.cc-option-price {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.cc-option-description {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+/* ========================================
+   SUMMARY SIDEBAR (Sticky)
+======================================== */
+.cc-details-right {
+    position: relative;
+}
+
+.cc-summary-sticky {
+    position: sticky;
+    top: 2rem;
+}
+
+.cc-summary-card {
+    border: 2px solid var(--color-primary);
+    padding: 2rem;
+    background: var(--color-secondary);
+}
+
+.cc-summary-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+}
+
+.cc-summary-content {
+    margin-bottom: 1.5rem;
+}
+
+.cc-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.cc-summary-row span:first-child {
+    color: var(--color-gray-600);
+}
+
+.cc-summary-row span:last-child {
+    font-weight: 500;
+}
+
+.cc-summary-options {
+    margin-top: 1rem;
+}
+
+.cc-summary-options-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-500);
+    margin-bottom: 0.75rem;
+}
+
+.cc-summary-option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.cc-summary-option-name {
+    flex: 1;
+    color: var(--color-gray-600);
+    line-height: 1.4;
+}
+
+.cc-summary-option-price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.cc-remove-option {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-gray-400);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.cc-remove-option:hover {
+    color: var(--color-primary);
+}
+
+.cc-summary-empty {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--color-gray-500);
+    font-size: 0.875rem;
+}
+
+.cc-summary-total {
+    border-top: 2px solid var(--color-primary);
+    padding-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cc-summary-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cc-summary-total-label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.cc-summary-total-value {
+    font-size: 2rem;
+}
+
+.cc-summary-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cc-btn-request {
+    width: 100%;
+    height: 3.5rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: var(--transition);
+    font-family: var(--font-family);
+}
+
+.cc-btn-request:hover {
+    background: var(--color-gray-900);
+}
+
+.cc-btn-request:disabled {
+    background: var(--color-gray-300);
+    cursor: not-allowed;
+}
+
+.cc-btn-consult {
+    width: 100%;
+    height: 3rem;
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-gray-200);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: var(--transition);
+    font-family: var(--font-family);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cc-btn-consult:hover {
+    background: var(--color-gray-50);
+}
+
+/* Summary Benefits */
+.cc-summary-benefits {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cc-benefit-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.cc-benefit-row svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   INFO SECTION
+======================================== */
+.cc-info-section {
+    padding: 5rem 0;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.cc-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .cc-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.cc-info-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.cc-info-text {
+    color: var(--color-gray-400);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.cc-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cc-info-list li {
+    display: flex;
+    align-items: start;
+    gap: 0.75rem;
+}
+
+.cc-info-list svg {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.cc-info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cc-info-card {
+    border: 1px solid var(--color-secondary);
+    padding: 2rem;
+}
+
+.cc-card-label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-gray-400);
+    margin-bottom: 0.5rem;
+}
+
+.cc-card-value {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.cc-card-text {
+    color: var(--color-gray-400);
+}
+
+/* ========================================
+   CTA SECTION
+======================================== */
+.cc-cta-section {
+    padding: 5rem 0;
+    border-top: 1px solid var(--color-primary);
+    background: var(--color-secondary);
+}
+
+.cc-cta-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.cc-cta-title {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.cc-cta-text {
+    color: var(--color-gray-600);
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+}
+
+.cc-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .cc-cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.cc-cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 1.25rem 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.cc-cta-btn-primary:hover {
+    background: var(--color-gray-800);
+}
+
+.cc-cta-btn-primary svg {
+    transition: transform 0.3s ease;
+}
+
+.cc-cta-btn-primary:hover svg {
+    transform: translateX(0.25rem);
+}
+
+.cc-cta-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: transparent;
+    color: var(--color-primary);
+    padding: 1.25rem 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    transition: var(--transition);
+}
+
+.cc-cta-btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+/* ========================================
+   UTILITIES
+======================================== */
+/* Tarjeta compacta para producto de servicio (botón tamaño 'normal') */
+.cc-service-product-card .cc-card {
+    display: flex;
+    flex-direction: column; /* imagen arriba, contenido abajo */
+    gap: 0.75rem;
+    align-items: stretch;
+    background: #fff;
+    padding: 0.85rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(13,15,23,0.04);
+}
+.cc-service-product-card .cc-card-media {
+    flex: none;
+    width: 100%;
+}
+.cc-service-product-card .cc-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+/* Price badge over image */
+.cc-price-badge {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(0,0,0,0.92);
+    color: #fff;
+    padding: 0.5rem 0.85rem;
+    font-weight: 800;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    z-index: 5;
+}
+.cc-price-badge.badge-pop {
+    animation: badgePop 420ms cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes badgePop {
+    0% { transform: translateY(6px) scale(.88); opacity: 0; }
+    60% { transform: translateY(-4px) scale(1.06); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.cc-service-product-card .cc-card {
+    transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
+    transform-style: preserve-3d;
+}
+.cc-service-product-card .cc-card-img {
+    transition: transform .25s cubic-bezier(.2,.9,.2,1);
+}
+
+/* touch active subtle scale */
+.cc-service-product-card .cc-card.touch-active { transform: translateY(-4px) scale(.995); }
+.cc-card-media { position: relative; }
+.cc-media-link { display: inline-block; }
+
+/* Marco gris tipo 'tabla' alrededor de la tarjeta de servicio */
+.cc-service-frame {
+    border: 1px solid #9ca3af; /* plomo claro */
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: #ffffff;
+    max-width: 980px;
+    margin: 1rem auto;
+}
+
+/* Asegurar que el badge se vea en negrita y en pequeño recuadro */
+.cc-price-badge strong { font-weight: 900; }
+.cc-service-product-card .cc-card-body {
+    flex: 1 1 auto;
+}
+.cc-service-product-card .cc-card-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+}
+.cc-service-product-card .cc-card-excerpt {
+    margin: 0 0 0.5rem 0;
+    color: #495057;
+    font-size: 0.95rem;
+}
+.cc-options { display: block; color: #6b7280; font-size: 0.95rem; margin: 0.25rem 0 0.5rem 0; }
+.cc-service-product-card .cc-price {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #111;
+}
+.cc-service-product-card .button {
+    background: #000;
+    color: #fff;
+    padding: 0.55rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    box-shadow: 0 6px 18px rgba(13,15,23,0.12);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.cc-service-product-card .button:hover {
+    transform: translateY(-2px);
+}
+
+/* Link wrapper for the service card */
+.cc-service-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+.cc-service-link .cc-card { transition: transform .12s ease, box-shadow .12s ease; }
+.cc-service-link:hover .cc-card { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(13,15,23,0.08); }
+
+/* VER MÁS link */
+.cc-link-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+.cc-link-more .arrow { font-weight: 700; }
+
+/* small micro interaction for VER MÁS on hover */
+.cc-link-more { transition: color .14s ease; display: inline-flex; align-items: center; }
+.cc-link-more .arrow { display: inline-block; transition: transform .14s ease, color .14s ease; margin-left: 0.35rem; }
+.cc-link-more:hover { color: var(--color-accent); }
+.cc-link-more:hover .arrow { transform: translateX(6px); }
+/* Ensure the card body stacks under the image and contents are centered and spaced */
+.cc-service-product-card .cc-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.5rem 0 0 0;
+    align-items: flex-start;
+}
+.cc-service-product-card .cc-card-title { font-size: 1.15rem; margin-top: 0.25rem; }
+.cc-service-product-card .cc-card-excerpt { color: #596066; font-size: 0.95rem; margin-bottom: 0.35rem; }
+.cc-service-product-card .cc-card-meta { width: 100%; display:flex; justify-content:flex-start; align-items:center; gap:0.6rem; }
+.cc-card-actions { margin-top: 0.5rem; }
+.cc-card-actions .cc-link-more { display:inline-flex; }
+
+/* Small responsive tweak so the text block doesn't overflow */
+@media (max-width: 640px) {
+    .cc-service-product-card .cc-card-img { height: 160px; }
+    .cc-service-product-card .cc-card-body { padding: 0.6rem 0 0; }
+    .cc-service-frame { margin: 0.75rem auto; }
+}
+
+/* Inline price styling under the image */
+.cc-service-price-inline {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #111;
+    margin-bottom: 0.25rem;
+}
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+    .cc-hero-title {
+        font-size: 3rem;
+    }
+    
+    .cc-section-title {
+        font-size: 2rem;
+    }
+    
+    .cc-services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cc-cta-title {
+        font-size: 2rem;
+    }
+    
+    .cc-info-title {
+        font-size: 2rem;
+    }
+    
+    .cc-details-header {
+        flex-direction: column;
+    }
+    
+    .cc-details-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cc-hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cc-btn-primary,
+    .cc-btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cc-service-details {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll reveal / entry animations for servicios */
+.cc-hero-inner {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1);
+}
+.cc-hero-inner.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cc-benefit-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.cc-benefit-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cc-service-card {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+    will-change: transform, opacity;
+    transition: opacity 0.6s cubic-bezier(0.2,0.8,0.2,1), transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
+}
+.cc-service-card.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* subtle image hover/parallax */
+.cc-service-image img {
+    transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
+}
+.cc-service-card:hover .cc-service-image img {
+    transform: scale(1.06) translateY(-4px);
+}
+
+/* Iluminación suave al hacer hover sobre la tarjeta del servicio
+   - aumenta brillo/contraste de la imagen
+   - añade un sutil resplandor y elevación del cuadro
+   - no afecta a otros elementos fuera de la tarjeta
+*/
+.cc-service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(6,8,15,0.12), 0 0 30px rgba(0,0,0,0.04);
+}
+
+.cc-service-card .cc-service-image::before {
+    /* pseudo overlay que aparece solo al hover para simular iluminación central */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), rgba(255,255,255,0) 35%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+.cc-service-card:hover .cc-service-image::before {
+    opacity: 1;
+}
+
+.cc-service-card:hover .cc-service-image img {
+    filter: brightness(1.12) contrast(1.06) saturate(1.02);
+    transform: scale(1.08) translateY(-6px);
+}
+
+/* Glow específico para el recuadro de producto compacto (.cc-service-product-card) */
+.cc-service-product-card .cc-card:hover {
+    box-shadow: 0 14px 34px rgba(13,15,23,0.12), 0 6px 24px rgba(100,180,32,0.04);
+    transform: translateY(-4px) scale(1.003);
+}
+
+/* Iluminación del título/hero cuando el usuario pasa el cursor sobre el hero - sutil y localizado */
+.cc-services-hero { --hero-glow: rgba(255,255,255,0.08); }
+.cc-services-hero:hover .cc-hero-title {
+    text-shadow: 0 12px 36px rgba(255,255,255,0.08), 0 2px 8px rgba(255,255,255,0.04);
+    transform: translateY(-2px);
+}
+
+/* Mantener el comportamiento accesible: respetar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .cc-service-card,
+    .cc-service-card .cc-service-image::before,
+    .cc-service-card .cc-service-image img,
+    .cc-service-product-card .cc-card,
+    .cc-services-hero .cc-hero-title {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    .cc-service-card .cc-service-image::before { opacity: 0 !important; }
+}
+
+/* notification animations (used by JS) */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* tiny utility to reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .cc-hero-inner,
+    .cc-benefit-item,
+    .cc-service-card,
+    .cc-service-image img,
+    .cc-service-details,
+    .cc-modal-inner {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Prevent background scroll when modal open */
+body.cc-modal-open {
+    overflow: hidden;
+}
+
+/* ===== Compact card overrides (más pequeñas para grid de servicios) ===== */
+.cc-service-frame {
+    max-width: 320px; /* reducir aún más para parecerse a la imagen de ejemplo */
+    /* aumentar padding para dejar espacio entre el contenido y la 'tabla' */
+    padding: 1.2rem; /* más separación entre borde y contenido */
+    border-radius: 6px;
+    margin: 0.6rem auto;
+    /* borde aún más fino y tenue */
+    border: 0.35px solid rgba(156,163,175,0.35);
+    box-sizing: border-box;
+}
+.cc-service-product-card .cc-card {
+    /* mantener padding interior reducido para apariencia compacta */
+    padding: 0.2rem;
+    gap: 0.35rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(13,15,23,0.03);
+}
+.cc-service-product-card .cc-card-img {
+    height: 120px; /* más compacto */
+}
+.cc-price-badge {
+    left: 8px;
+    bottom: 8px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Dar la misma forma y tratamiento de la imagen como en el ejemplo */
+.cc-service-product-card .cc-card-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.cc-service-product-card .cc-media-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.cc-service-product-card .cc-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+}
+.cc-service-product-card .cc-card-media::after {
+    /* sutil overlay oscuro en la parte superior para mejor contraste del badge */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.28), rgba(0,0,0,0.02));
+    pointer-events: none;
+}
+.cc-service-product-card .cc-card:hover .cc-card-img { transform: scale(1.03) translateY(-3px); }
+
+/* ajustar badge para que se parezca al ejemplo (fondo oscuro, texto pequeño, borde redondeado) */
+.cc-price-badge {
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.28rem 0.5rem;
+    font-size: 0.78rem;
+}
+.cc-service-product-card .cc-card-title { font-size: 0.95rem; }
+.cc-service-product-card .cc-card-excerpt { font-size: 0.82rem; margin-bottom: 0.3rem; }
+.cc-options { font-size: 0.85rem; margin: 0.12rem 0 0.35rem 0; }
+.cc-service-product-card .cc-price { font-size: 0.95rem; }
+.cc-service-product-card .button { padding: 0.35rem 0.7rem; font-size: 0.9rem; box-shadow: 0 5px 12px rgba(13,15,23,0.12); }
+.cc-link-more { gap: 0.35rem; }
+.cc-link-more:hover .arrow { transform: translateX(5px); }
+
+@media (max-width: 640px) {
+    .cc-service-product-card .cc-card-img { height: 100px; }
+    .cc-service-frame { max-width: 100%; margin: 0.5rem; }
+}
+
+/* Grid más denso: permitir más tarjetas por fila en pantallas grandes */
+.cc-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+/* Espaciado compacto: reducir distancia entre título, descripción y linea de opciones */
+.cc-service-product-card .cc-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem; /* menos espacio vertical entre elementos */
+    padding-top: 0.15rem;
+}
+.cc-service-product-card .cc-card-title {
+    margin: 0 0 0.12rem 0; /* título más pegado al subtítulo */
+    line-height: 1.05;
+}
+.cc-service-product-card .cc-card-excerpt {
+    margin: 0 0 0.18rem 0; /* menos separación hacia la línea de opciones */
+    line-height: 1.15;
+}
+.cc-options {
+    margin: 0.08rem 0 0.18rem 0; /* mantener un pequeño espacio pero no mucho */
+    font-size: 0.85rem;
+}
+.cc-card-actions { margin-top: 0.28rem; }
+
+/* Footer row: opciones a la izquierda, VER MÁS a la derecha (compacto) */
+.cc-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    width: 100%;
+}
+.cc-card-footer .cc-options {
+    color: var(--color-gray-500);
+}
+.cc-card-footer .cc-card-actions {
+    margin-top: 0;
+}
+.cc-link-more { white-space: nowrap; }
+.cc-link-more .arrow { margin-left: 0.35rem; }

@@ -1,0 +1,90 @@
+/* Estilos para la vista de Carrito — layout productos + resumen */
+:root{--cc-accent:#0b6ef6;--cc-black:#000;--cc-frame:#e6e7e9;--cc-muted:#6b7280}
+.cc-cart-page{display:grid;grid-template-columns:1fr 360px;gap:28px;padding:28px 12px}
+.cc-cart-main{background:#fff;padding:18px;border:1px solid var(--cc-frame);border-radius:6px}
+.cc-cart-title{font-size:28px;font-weight:800;margin:0 0 12px}
+.cc-cart-items{display:flex;flex-direction:column;gap:12px}
+.cc-cart-item{display:grid;grid-template-columns:84px 1fr 120px;gap:12px;align-items:center;padding:12px;border:1px solid #f3f4f6;border-radius:6px;background:#fff}
+.cc-cart-item-thumbnail img{width:84px;height:64px;object-fit:cover;border-radius:6px}
+.cc-cart-item-title{font-weight:700;margin-bottom:6px}
+.cc-cart-item-meta{font-size:12px;color:var(--cc-muted)}
+.cc-qty-controls{display:flex;align-items:center;gap:8px}
+.cc-qty-controls input[type=number]{width:64px;padding:6px;border:1px solid #e5e7eb;border-radius:4px;text-align:center}
+.cc-cart-item-price{text-align:right;font-weight:700}
+
+.cc-cart-side{position:relative}
+.cc-cart-summary{position:sticky;top:20px;background:#fff;padding:18px;border:1px solid var(--cc-frame);border-radius:6px}
+.cc-summary-title{font-weight:700;margin-bottom:12px}
+.cc-coupon{display:flex;gap:8px;margin-bottom:12px}
+.cc-coupon input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:4px}
+.cc-coupon button{background:#000;color:#fff;padding:10px 14px;border-radius:6px;border:none}
+.cc-totals{margin-top:8px;border-top:1px dashed #efefef;padding-top:12px}
+.cc-totals .row{display:flex;justify-content:space-between;margin-bottom:8px}
+.cc-checkout-btn{display:block;background:#000;color:#fff;text-align:center;padding:12px;border-radius:6px;text-decoration:none;font-weight:700;margin-top:12px}
+
+/* Responsive */
+@media (max-width:980px){
+    .cc-cart-page{grid-template-columns:1fr;}
+    .cc-cart-side{order:2}
+}
+
+/* Mini-cart dropdown (header) */
+.cc-mini-cart{
+    display:block; background:#fff; border:1px solid var(--cc-frame); border-radius:8px; box-shadow:0 18px 40px rgba(10,12,20,0.06); overflow:hidden; opacity:0; transform:translateY(-6px) scale(.995); transition:opacity .22s ease, transform .22s ease; pointer-events:none;
+}
+/* NOTE: restaurado — mantener visible el icono del header y ocultar SOLO el contenido/panel del theme */
+/* Ocultamos únicamente los paneles desplegables del theme que generan duplicados (no el icono) */
+/* Only target the header/offcanvas cart panels (avoid global .ct-cart-content rules that break other pages) */
+.ct-header-cart > .ct-cart-content,
+.ct-shortcuts-bar [data-id="cart"] > .ct-cart-content,
+.ct-header-cart .widget_shopping_cart,
+.ct-shortcuts-bar [data-id="cart"] .widget_shopping_cart {
+    /* Hide the theme header dropdown so our custom mini-cart can be used without duplicates */
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+.cc-mini-cart.open{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.cc-mini-cart-inner{ padding:12px; max-height:380px; overflow:auto; min-width:280px; }
+.cc-mini-cart .widget_shopping_cart_content, .cc-mini-cart .woocommerce-mini-cart{ font-family: inherit; color: var(--cc-black); }
+.cc-mini-cart .woocommerce-mini-cart__item{ display:flex; gap:10px; align-items:center; padding:10px 8px; border-bottom:1px solid #f3f4f6; }
+.cc-mini-cart .woocommerce-mini-cart__item img{ width:48px; height:48px; object-fit:cover; border-radius:6px }
+.cc-mini-cart .cc-mini-title{ font-weight:700; font-size:0.95rem }
+.cc-mini-cart .cc-mini-meta{ font-size:0.85rem; color:var(--cc-muted) }
+.cc-mini-cart .cc-mini-row{ display:flex; justify-content:space-between; gap:8px; align-items:center }
+.cc-mini-cart .cc-mini-subtotal{ padding-top:8px; display:flex; justify-content:space-between; font-weight:700 }
+.cc-mini-cart .cc-mini-actions{ display:flex; gap:8px; margin-top:10px }
+.cc-mini-cart .button{ padding:8px 10px; border-radius:6px; border:1px solid #e6e7e9; background:#fff; color:var(--cc-black); text-decoration:none }
+.cc-mini-cart .button-primary{ background:#000; color:#fff; border:none }
+.cc-mini-cart .cc-mini-empty{ padding:18px; color:var(--cc-muted); text-align:center }
+
+/* make sure the dropdown fits on small screens */
+@media (max-width:640px){
+    .cc-mini-cart{ position:fixed !important; left:8px; right:8px; top:70px !important; width:auto !important; min-width:unset; }
+}
+
+/* ==================================================
+   QUICK FIX: ocultar mini-cart duplicado del tema
+   - Blocksy y algunos plugins generan su propio panel (#woo-cart-panel,
+     .ct-cart-content, .ct-panel-inner, .ct-cart-content) que puede aparecer
+     además de nuestro `.cc-mini-cart`. Aquí ocultamos sólo el contenido
+     desplegable/panel del tema, manteniendo visible el icono del carrito.
+   - Si prefieres eliminar nuestro mini-cart en su lugar, dilo y lo cambio.
+================================================== */
+
+/* Blocksy header cart panel (general) */
+/* Ensure inner widget content inherits our styles (items list) */
+.ct-cart-content .widget_shopping_cart_content,
+.ct-cart-content .woocommerce-mini-cart,
+.ct-panel-inner .woocommerce-mini-cart,
+.site-header .widget_shopping_cart .widget_shopping_cart_content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+}
+
+/* Asegurar que nuestro mini-cart sigue visible y por encima */
+.cc-mini-cart { z-index: 99999 !important; }
+

@@ -1,0 +1,101 @@
+// BACKUP: current custom.js (auto-created)
+document.addEventListener('DOMContentLoaded',()=>{
+
+    // HERO
+    class HeroCarousel{
+        constructor(rootId, delay=5000){
+            this.root=document.getElementById(rootId);
+            if(!this.root)return;
+            this.slides=[...this.root.querySelectorAll('.hero-slide')];
+            this.dots=this.root.querySelector('.hero-dots');
+            this.current=0;
+            this.delay=delay;
+            this.init();
+        }
+        init(){
+            this.createDots();
+            this.showSlide(0);
+            this.start();
+            this.bindControls();
+        }
+        createDots(){
+            if(!this.dots)return;
+            this.dots.innerHTML='';
+            this.slides.forEach((_,i)=>{
+                const btn=document.createElement('button');
+                btn.className=i===0?'active':'';
+                btn.type='button';
+                btn.onclick=()=>this.showSlide(i);
+                this.dots.appendChild(btn);
+            });
+        }
+        showSlide(i){
+            this.current=i;
+            const offset=-i*100;
+            this.root.querySelector('.hero-slides').style.transform=`translateX(${offset}%)`;
+            this.updateDots();
+        }
+        updateDots(){
+            if(!this.dots)return;
+            [...this.dots.children].forEach((d,i)=>d.classList.toggle('active',i===this.current));
+        }
+        next(){this.showSlide((this.current+1)%this.slides.length)}
+        start(){this.stop();this.interval=setInterval(()=>this.next(),this.delay)}
+        stop(){if(this.interval){clearInterval(this.interval);this.interval=null}}
+        bindControls(){
+            this.root.addEventListener('mouseenter',()=>this.stop());
+            this.root.addEventListener('mouseleave',()=>this.start());
+        }
+    }
+
+    window.heroCarousel=new HeroCarousel('heroCarousel');
+
+    // RENDER CATEGORIES
+    function renderCategories(){
+        const track=document.getElementById('categoriesTrack');
+        if(!track)return; track.innerHTML='';
+        categories.forEach(cat=>{
+            track.innerHTML+=`
+                <div class="carousel-item">
+                    <div class="category-card">
+                        <img src="${cat.image}" alt="${cat.name}">
+                        <div class="category-overlay"></div>
+                        <div class="category-content">
+                            <p class="category-count">${cat.count}</p>
+                            <h3 class="category-name">${cat.name}</h3>
+                        </div>
+                    </div>
+                </div>`;
+        });
+    }
+
+    // RENDER PRODUCTS
+    function renderProducts(){
+        const track=document.getElementById('bestsellersTrack'); if(!track)return; track.innerHTML='';
+        const bestsellers=products.filter(p=>p.reviews>400);
+        bestsellers.forEach(p=>{
+            track.innerHTML+=`
+            <div class="carousel-item">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="${p.image}" alt="${p.name}" class="product-image">
+                        <div class="product-badges">
+                            ${p.reviews>400?'<div class="product-badge badge-bestseller">Bestseller</div>':''}
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${p.name}</h3>
+                        <p class="product-category">${p.category}</p>
+                        <div class="product-price-wrapper">
+                            <span class="product-price">$${p.price.toFixed(2)}</span>
+                        </div>
+                        <button class="product-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>`;
+        });
+    }
+
+    renderCategories();
+    renderProducts();
+});
